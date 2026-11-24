@@ -1,56 +1,78 @@
-# 🛡️ Seismic Privacy Playground
+﻿# 🛡️ Seismic Privacy Playground
 
-> The first open-source public dApp on the Seismic network. An interactive sandbox for exploring shielded state, on-chain encryption, and client-side interactions.
+> Open-source developer sandbox for **Seismic Testnet** built with Vite, TypeScript, Viem, and `seismic-viem` — exploring shielded transactions, encrypted state reads, and client-side payload decryption.
 
-## 📖 About The Project
+---
 
-While architecting a Concentrated Liquidity Market Maker (CLMM) for the Seismic ecosystem, I needed to dive deep into `seismic-viem` to master shielded transactions and state encryption. During my research, I noticed a lack of live public applications on the network to test these concepts.
+## Overview
 
-I built the **Seismic Privacy Playground** to bridge this gap. For fellow developers, this repository serves as a practical, hands-on reference to understand how to seamlessly integrate and build with Seismic. For everyday Web3 explorers, it provides a fun, interactive sandbox to test the network, use the faucet, and experience public versus private on-chain messaging firsthand.
+While architecting [Rift CLMM](https://github.com/Shahrokh20000/rift-clmm) for the Seismic ecosystem, this sandbox served as a practical developer reference for integrating [`seismic-viem`](https://www.npmjs.com/package/seismic-viem) into browser-based dApps — demonstrating public vs. shielded writes, keypair management, and client-side trial decryption without external backend dependencies.
 
-## ✨ Features
+```mermaid
+flowchart LR
+    B["Browser App (TypeScript + seismic-viem)"] -->|Standard Calldata| PUB["Public Contract Write"]
+    B -->|Shielded Calldata + Shared ECDH Key| SH["Shielded Contract Write"]
+    PUB --> SC["Seismic Testnet Contract"]
+    SH --> SC
+    SC -->|Signed Read & Trial Decryption| B
+```
 
-* **🔐 Dual-State Routing:** Seamlessly toggle between submitting public data or fully shielded on-chain messages.
-* **🕵️‍♂️ Encrypted State Decryption:** On-the-fly client-side decryption of private transaction logs using `seismic-viem`.
-* **🔑 Keypair Management:** Automatic validation and initialization of internal contract keys.
-* **📊 Interactive Portfolio:** A dedicated, glassmorphism-styled UI to view and read your public and encrypted payload history.
+---
 
-## 🛠️ Tech Stack
+## Features
 
-* **Frontend:** HTML, CSS, TypeScript, Vite
-* **Web3 Integration:** [Viem](https://viem.sh/), `seismic-viem`
-* **Network:** Seismic Testnet
+- **Dual-State Routing:** Toggle cleanly between public on-chain calls and shielded `seismic-viem` transactions.
+- **Client-Side Encrypted Payload Decryption:** Derive shared secrets (`secp256k1`) and decrypt private transaction history directly in browser memory.
+- **Session Keypair Initialization:** Automated keypair check and contract public-key initialization workflow.
+- **Interactive Portfolio View:** Glassmorphic TypeScript UI comparing public and encrypted interaction histories side-by-side.
 
-## 🚀 Getting Started
+---
 
-To get a local copy up and running, follow these simple steps.
+## Tech Stack
+
+- **Frontend:** TypeScript, Vite, HTML5, CSS3
+- **Web3 & Cryptography:** [`seismic-viem`](https://github.com/SeismicSystems/seismic-viem), [`viem`](https://viem.sh/), `@noble/ciphers`, `@noble/curves`
+- **Network:** Seismic Testnet
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-Make sure you have Node.js and npm installed on your machine.
+- Node.js (`v18+`) and `npm`
 
-### Installation
+### Local Development
 
 1. Clone the repository:
-    `git clone https://github.com/Shahrokh20000/seismic-viem-dev.git`
+   ```bash
+   git clone https://github.com/Shahrokh20000/seismic-demo-dev.git
+   cd seismic-demo-dev
+   ```
 
-2. Navigate to the project directory:
-    `cd seismic-viem-dev/dist`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-3. Install NPM packages:
-    `npm install`
+3. Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
 
-4. Start the development server:
-    `npm run dev`
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
-## 💧 Faucet & Testing
+---
 
-To interact with the dApp and submit messages, you will need some testnet tokens to cover gas fees. You can grab them from the official [Seismic Faucet](https://faucet.seismictest.net/).
+## Faucet & Testing
 
-## 🤝 Contributing
+Testnet gas tokens are required to submit on-chain messages on Seismic Testnet and can be requested via the official [Seismic Faucet](https://faucet.seismictest.net/).
 
-Contributions, issues, and feature requests are always welcome! Feel free to check the issues page if you want to contribute.
+---
 
-## 📄 License
+## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the [MIT License](LICENSE).
